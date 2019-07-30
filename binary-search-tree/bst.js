@@ -51,13 +51,45 @@ class BST {
   }
 
   /**
-   * Removing given node from BST
+   * Finding minimum node starting from given Node
    * @param {*} node
-   * @param {*} key
+   */
+  findMinNode(node) {
+    if (node.left === null) return node;
+    else return this.findMinNode(node.left);
+  }
+
+  /**
+   * Removing given node from BST
+   * @param {Node} node
+   * @param {Number} key
    */
   removeNode(node, key) {
     if (root === null) return null;
     else if (key < node.data) {
+      node.left = this.removeNode(node.left, key);
+      return node;
+    } else if (key > node.data) {
+      node.right = this.removeNode(node.right, key);
+      return node;
+    } else {
+      if (node.left === null && node.right === null) {
+        node = null;
+        return node;
+      }
+
+      if (node.left === null) {
+        node = node.right;
+        return node;
+      } else if (node.right === null) {
+        node = node.left;
+        return node;
+      }
+
+      let aux = this.findMinNode(node.right);
+      node.data = aux.data;
+      node.right = this.removeNode(node.right, aux.data);
+      return node;
     }
   }
 
