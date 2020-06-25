@@ -171,7 +171,7 @@ class Graph {
   dfsUtil(start, visited) {
     visited[start] = true;
 
-    console.log(start);
+    console.log(start); // Here we can do something with Node
 
     let neighbours = this.AdjList.get(start);
     let neighboursNr = [];
@@ -209,7 +209,7 @@ class Graph {
     while (stack.length) {
       start = stack[stack.length - 1];
       stack.pop();
-      console.log(start);
+      console.log(start); // Here we can do something with Node
       visited[start] = true;
       for (let i = this.AdjList.get(start).length - 1; i >= 0; i--)
         if (!visited[this.AdjList.get(start)[i].number])
